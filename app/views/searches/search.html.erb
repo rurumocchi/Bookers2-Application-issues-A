@@ -1,0 +1,47 @@
+<div class = "container">
+  <div class = "col-xs-12">
+    <% if @model == 'user' %>
+    <h3>Users search for "<%= @value %>"</h3>
+    <table class = "table">
+     <thead>
+      <tr>
+       <th>image</th>
+       <th>name</th>
+       <th colspan = "3"></th>
+      </tr>
+     </thead>
+     <% @datas.each do |user| %>
+     <tbody>
+       <td><%= attachment_image_tag user, :profile_image, format: "jpeg", fallback: "no_image.jpg", size: "40x40" %></td>
+       <td><%= user.name %></td>
+       <td><%= link_to 'Show', user_path(user) %></td>
+     </tbody>
+     <% end %>
+    </table>
+    <% elsif @model == 'book' %>
+    <h3>Books search for "<%= @value %>"</h3>
+    <table class = "table">
+     <thead>
+      <tr>
+       <th></th>
+       <th>Title</th>
+       <th>Opinion</th>
+       <th colspan = "3"></th>
+      </tr>
+     </thead>
+     <tbody>
+      <% @datas.each do |book| %>
+       <tr>
+        <td><%= attachment_image_tag book.user, :profile_image, format: "jpeg", fallback: "no_image.jpg", size: "40x40" %></td>
+        <td><%= link_to book.title, book_path(book) %></td>
+        <td><%= book.body %></td>
+       </tr>
+      <% end %>
+     </tbody>
+    </table>
+    <% else %>
+    該当の書籍が見つかりませんでした
+  <% end %>
+
+  </div>
+</div>

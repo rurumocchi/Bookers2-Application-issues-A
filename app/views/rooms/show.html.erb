@@ -1,0 +1,39 @@
+<div class = "container">
+  <div class = "row">
+    <div class = "col-md-10">
+      <% @UserRooms.each do |u| %>
+       <a class="rooms-user-link" href="/users/<%= u.user.id %>">
+         <h2> <%= u.user.name %>さんとのチャット</h2>
+       </a>
+      <% end %>
+      <table class="table table-borderless">
+        <% if @messages.present? %>
+          <% @messages.each do |m| %>
+            <% if m.user == current_user %>
+              <tbody>
+                <tr>
+                  <td>
+                    <p style="text-align: left;"><%= m.message %><br><%= m.created_at.strftime("%Y-%m-%d %H:%M") %></p>
+                  </td>
+                </tr>
+              </tbody>
+            <% else %>
+              <tbody>
+                <tr>
+                  <td>
+                    <p style="text-align: right;"><%= m.message %><br><%= m.created_at.strftime("%Y-%m-%d %H:%M") %></p>
+                  </td>
+                </tr>
+              </tbody>
+            <% end %>
+          <% end %>
+        <% end %>
+      </table>
+      <%= form_with model: @message, local: true do |f| %>
+        <%= f.text_field :message %>
+        <%= f.hidden_field :room_id, value: @room.id, class: "form-control" %>
+        <%= f.submit "送信する", class: 'btn btn-secondary' %>
+      <% end %>
+    </div>
+  </div>
+</div>

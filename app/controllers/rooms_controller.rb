@@ -6,6 +6,7 @@ class RoomsController < ApplicationController
     @room = Room.create
     @entry1 = UserRoom.create(user_id: current_user.id, room_id: @room.id)
     @entry2 = UserRoom.create(params.require(:user_room).permit(:user_id, :room_id).merge(room_id: @room.id))
+    redirect_to "/rooms/#{@room.id}"
   end
 
   def show

@@ -32,9 +32,9 @@
       <i class="fas fa-user-cog"></i>
     <% end %>
   <% elsif current_user.following?(user) %>
-    <%= link_to "フォロー外す",  user_relationships_path(user), method: :delete, class: "btn btn-info btn-sm" %>
+    <%= link_to "フォロー外す",  user_relationships_path(user), method: :delete, class: "btn btn-primary btn-sm" %>
   <% else %>
     <%= link_to "フォローする",  user_relationships_path(user), method: :post, class: "btn btn-success btn-sm" %>
   <% end %>
-
+ <%= render 'users/message', user: user %>
 </div>
